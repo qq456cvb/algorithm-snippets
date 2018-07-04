@@ -37,7 +37,7 @@ def bilateral(img, sigma_s=4, sigma_i=0.025, fast_approx=True):
 
 
 if __name__ == '__main__':
-    img = cv2.imread('lenna.jpg')
+    img = cv2.imread('../lenna.jpg')
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     img = bilateral(img)
