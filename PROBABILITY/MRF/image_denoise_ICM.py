@@ -28,7 +28,7 @@ if __name__ == "__main__":
         j = np.random.randint(1, x.shape[1] - 1)
         cand = -x[i, j]
         
-        cost = -beta * cand * (x[i + 1, j] + x[i - 1, j] + x[i, j + 1] + x[i, j - 1]) - eta * cand * y[i, j]
+        cost = -beta * (cand - x[i, j]) * (x[i + 1, j] + x[i - 1, j] + x[i, j + 1] + x[i, j - 1]) - eta * (cand - x[i, j]) * y[i, j]
         if cost < 0:
             min_energy += cost
             x[i, j] = cand
