@@ -1,35 +1,34 @@
 # algorithm-snippets
 
-<!-- README refined by Cursor -->
+Small, self-contained Python implementations of classic algorithms from different fields — each one a minimal experiment that shows how the algorithm works, not a packaged library.
 
-algorithms across many fields, some small experiments giving the idea how the algorithm works
+## Snippets
 
-## Overview
+### Computer Vision (`CV/`)
 
-This repository contains Python code from an older research, course, or prototype project. The README has been refreshed to make the repository easier to scan while preserving the original notes below.
+- **`fast-bilateral-filter/`** — the bilateral filter recast as a linear convolution in a *3D bilateral grid* (space × intensity), following [A Fast Approximation of the Bilateral Filter using a Signal Processing Approach (ECCV 2006)](https://link.springer.com/chapter/10.1007/11744085_44) by Paris and Durand. Includes the fast variant that pre-blurs and downsamples the grid before the Gaussian, then upsamples the result.
+- **`harris-detector/`** — Harris corner detection from scratch: Sobel derivatives, the Gaussian-smoothed structure tensor, and the `det(M) − k·trace(M)²` corner response, with detected corners drawn on the image.
 
-## Repository Contents
+Both scripts run on the bundled `CV/lenna.jpg`.
 
-- `CV/`
-- `MATH/`
-- `PROBABILITY/`
+### Math (`MATH/`)
 
-## Setup
+- **`conjugate-gradient/`** — the conjugate gradient method solving a random 9×9 symmetric system, printing the residual norm per iteration to show convergence in at most n steps.
 
-- This legacy repo does not pin a full environment. Start from the language/toolchain implied by the source files, then install missing packages as reported by the runtime.
+### Probability (`PROBABILITY/`)
 
-## Usage
+- **`MRF/`** — binary image denoising with an Ising-model Markov random field, optimized by Iterated Conditional Modes (greedy single-pixel flips), as in PRML §8.3.3. Binarizes Lenna, adds salt noise, and recovers the clean image.
 
-- inspect the source directories listed below; many of these older repos were kept as research prototypes rather than packaged applications.
+## Running
 
-## Data and Artifacts
+Each snippet is a standalone script; dependencies are just NumPy, SciPy, and OpenCV (`opencv-python`).
 
-No new large artifact is stored in this repository. If a dataset or checkpoint is required, follow the links and notes in the original section below.
+```bash
+cd CV/harris-detector && python main.py
+```
 
-## Status
-
-This is a `Batch C` cleanup pass for a legacy repository. Commands may require dependency/version adjustments on a modern machine.
+The MRF script expects to be run from the repository root (`python PROBABILITY/MRF/image_denoise_ICM.py`) since it loads `./CV/lenna.jpg`.
 
 ## License
 
-See `LICENSE` for license details.
+MIT — see `LICENSE`.
